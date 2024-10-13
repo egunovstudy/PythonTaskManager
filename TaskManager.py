@@ -1,8 +1,8 @@
 import asyncio
 
-from hw11.Task import Task
-from hw11.TaskManagerClass import TaskManagerClass
-from hw11.TaskStatus import TaskStatus
+from Task import Task
+from TaskManagerClass import TaskManagerClass
+from TaskStatus import TaskStatus
 
 
 class TaskManager(metaclass=TaskManagerClass):
@@ -10,8 +10,7 @@ class TaskManager(metaclass=TaskManagerClass):
 
     def add_new_task(self, name: str):
 
-        max_id = 1 if len(self.tasks) == 0 else sorted(self.tasks, key=lambda t: t.id)[-1].id
-
+        max_id = 0 if len(self.tasks) == 0 else sorted(self.tasks, key=lambda t: t.id)[-1].id
         task = Task(max_id + 1, name)
 
         self.tasks.append(task)
@@ -19,11 +18,16 @@ class TaskManager(metaclass=TaskManagerClass):
 
     def delete_task_by_id(self, task_id: int):
         task: Task = self.find_task_by_id(task_id)
-        self.tasks.remove(task)
+        if task:
+            self.tasks.remove(task)
+            print(f"Задача {task} удалена")
+        else:
+            print(f"Не найдена задача с ID {task_id}")
 
     def find_task_by_id(self, task_id: int):
         self.__selection_sort()
-        return self.__binary_search(task_id, 0, len(self.tasks) - 1)
+        task_index = self.__binary_search(task_id, 0, len(self.tasks) - 1)
+        return self.tasks[task_index] if task_index >= 0 else None
 
     def show_all_tasks(self):
         print(self.tasks)

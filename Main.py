@@ -1,11 +1,12 @@
 import asyncio
 
-from hw11.Task import Task
-from hw11.TaskManager import TaskManager
+from Task import Task
+from TaskManager import TaskManager
 
 if __name__ == '__main__':
     taskManager: TaskManager = TaskManager()
     while True:
+        print("\n\n\n")
         print("Добро пожаловать в интерфейс управления задачами")
         print("Список команд")
         print("1 - добавить задачу")
@@ -13,6 +14,7 @@ if __name__ == '__main__':
         print("3 - удалить задачу по ID")
         print("4 - запустить все задачи")
         print("5 - вывести все задачи  ")
+        print("\n\n\n")
         num = input("Введите число:  ")
         if not num.isdigit() or int(num) > 5 or int(num) < 1:
             print("Неверный ввод")

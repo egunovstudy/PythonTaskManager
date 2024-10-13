@@ -2,7 +2,7 @@ import datetime
 import random
 import time
 
-from hw11.TaskStatus import TaskStatus
+from TaskStatus import TaskStatus
 
 
 class Task:
